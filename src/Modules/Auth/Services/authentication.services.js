@@ -36,12 +36,6 @@ export const SignUpservices = async (req, res) => {
         // ✅ Encrypt the phone number
         const encryptedPhone = Encryption({ value: phone, secretKey: process.env.ENCRYPTION_SECRET_KEY });
 
-        // ✅ Create a new user
-        const newUser = await User.create({ firstName, lastName, email, password: hashedPassword, phone: encryptedPhone, age, gender, DOB });
-        if (!newUser) {
-            return res.status(500).json({ message: 'User creation failed, please try again' });
-        }
-
         // ✅ Generate token
         const token = createToken({ payload: { email }, secretKey: process.env.JWT_SECRET_KEY, option: { expiresIn: '2h' } });
 
@@ -50,6 +44,12 @@ export const SignUpservices = async (req, res) => {
 
         // ✅ Send verification Email
         emitter.emit('sendEmail', [email, 'Verify Your Email', { text: `Verify Your Email`, data: firstName, confirmEmailLink }]);
+
+        // ✅ Create a new user
+        const newUser = await User.create({ firstName, lastName, email, password: hashedPassword, phone: encryptedPhone, age, gender, DOB });
+        if (!newUser) {
+            return res.status(500).json({ message: 'User creation failed, please try again' });
+        }
 
         // ✅ Success Response
         return res.status(201).json({ message: 'User created successfully', user: newUser });
