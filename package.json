@@ -24,7 +24,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": { 
-    "build": "npm i",
+    "build": "npm run build",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
