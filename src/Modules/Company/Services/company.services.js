@@ -1,5 +1,5 @@
 import { Company } from "../../../DB/models/index.js";
-import cloudinary from "../../../config/cloudinary.config.js";
+import { cloudinary } from "../../../config/cloudinary.config.js";
 
 
 // ✅ Add Company Service
@@ -73,8 +73,8 @@ export const updateCompanyServices = async (req, res) => {
 // ✅ Soft Delete Company Service
 export const deleteCompanyServices = async (req, res) => {
     try {
-        const { _id } = req.loggedInUser; 
-        const companyId = req.params.id; 
+        const { _id } = req.loggedInUser;
+        const companyId = req.params.id;
 
         // Find the company by ID and ensure it belongs to the user
         const company = await Company.findOne({ _id: companyId, createdBy: _id });
@@ -171,7 +171,7 @@ export const uploadCompanyCoverServices = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: 'Something went wrong', error });
     }
-}   
+}
 // ✅ Delete Company Logo
 export const deleteCompanyLogoServices = async (req, res) => {
     try {
