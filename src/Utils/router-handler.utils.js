@@ -1,6 +1,6 @@
+import * as controllers from '../Modules/index.js';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { globalErrorHandlerMiddleware } from '../Middleware/error-handler.middleware.js';
-import * as controllers from '../Modules/index.js';
 import { mainSchema } from '../GraphQl/main.schema.js';
 import { rateLimit } from 'express-rate-limit'
 
