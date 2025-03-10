@@ -1,7 +1,7 @@
 import { compareSync, hashSync } from "bcrypt";
 import { BlacklistTokens, User } from "../../../DB/models/index.js";
 import { Decryption, Encryption } from "../../../Utils/index.js";
-import cloudinary from "../../../config/cloudinary.config.js";
+import { cloudinary } from "../../../config/cloudinary.config.js";
 
 
 // ✅ Update Profile Service
