@@ -9,7 +9,10 @@ const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
     max: 5,
     message: 'Too many requests from this IP, please try again after 15 minutes',
-    legacyHeaders: false
+    legacyHeaders: false,
+    skip: (req, res) => {
+        return req.headers['x-forwarded-for'] === '127.0.0.1';
+    }
 })
 
 const controllerHandler = (app, express) => {
@@ -40,6 +43,7 @@ const controllerHandler = (app, express) => {
 
     // ✅ Rate Limiting
     app.use(limiter);
+    app.set('trust proxy', 1)
 
     // ✅ Main Routes
     app.get("/", (req, res) => res.send("Hello from the Job Search App!"));
