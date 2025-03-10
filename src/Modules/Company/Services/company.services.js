@@ -1,5 +1,6 @@
+import cloudinary from "../../../config/cloudinary.config.js";
 import { Company } from "../../../DB/models/index.js";
-import { cloudinary } from "../../../config/cloudinary.config.js";
+
 
 
 // ✅ Add Company Service
